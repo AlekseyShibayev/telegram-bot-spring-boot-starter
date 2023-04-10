@@ -1,1 +1,1 @@
-Spring Boot Starter для [TelegramNotificationService](https://github.com/AlekseyShibayev/TelegramNotificationService)
+Spring Boot Starter для проекта [TelegramNotificationService](https://github.com/AlekseyShibayev/TelegramNotificationService)
