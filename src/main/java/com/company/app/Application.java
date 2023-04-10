@@ -19,8 +19,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * {@link com.company.app.springboot.application.ApplicationTest}
  */
 @Slf4j
-//@EnableCaching
-@EnableScheduling
 @EnableAspectJAutoProxy
 @SpringBootApplication
 public class Application {
