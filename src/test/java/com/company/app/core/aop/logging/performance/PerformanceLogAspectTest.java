@@ -1,7 +1,7 @@
 package com.company.app.core.aop.logging.performance;
 
-import com.company.app.springboot.application.SpringBootApplicationTest;
 import com.company.app.core.aop.logging.performance.testEntity.ExperimentContextChild;
+import com.company.app.springboot.application.SpringBootApplicationTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

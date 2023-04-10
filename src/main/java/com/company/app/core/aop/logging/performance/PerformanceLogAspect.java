@@ -40,6 +40,7 @@ import java.util.concurrent.TimeUnit;
  * Аспект будет создан, если application.performanceLogAnnotation=true
  * Логирование будет, если <logger name=".*.PerformanceLogAspect" level="DEBUG" additivity="false">
  * <p>
+ *
  * @author shibaev.aleksey 30.03.2023
  */
 @Slf4j

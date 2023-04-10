@@ -1,7 +1,6 @@
 package com.company.app.core.tool.impl;
 
 import com.company.app.core.tool.JsonSearcher;
-import com.company.app.core.tool.impl.DataExtractorToolImpl;
 import lombok.SneakyThrows;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
