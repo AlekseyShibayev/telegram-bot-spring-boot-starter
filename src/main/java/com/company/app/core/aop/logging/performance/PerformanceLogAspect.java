@@ -45,7 +45,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Aspect
 @Component
-@ConditionalOnProperty(prefix = "application", name = "performanceLogAnnotation")
+@ConditionalOnProperty(prefix = "telegram-bot-spring-boot-starter", name = "performanceLogAnnotation")
 public class PerformanceLogAspect {
 
 	@Autowired

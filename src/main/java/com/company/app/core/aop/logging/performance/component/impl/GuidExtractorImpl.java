@@ -7,7 +7,6 @@ import com.company.app.core.aop.logging.performance.component.api.GuidExtractor;
 import com.company.app.core.aop.logging.performance.component.api.Reflector;
 import com.google.common.base.Stopwatch;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,7 +27,7 @@ public class GuidExtractorImpl implements GuidExtractor {
 	ActionRegistry actionRegistry;
 
 	public String extractGuid(ProceedingJoinPoint proceedingJoinPoint) {
-		String result = StringUtils.EMPTY;
+		String result = "";
 		Stopwatch stopwatch = Stopwatch.createStarted();
 
 		try {
