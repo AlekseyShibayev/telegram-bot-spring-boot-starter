@@ -1,6 +1,6 @@
 package com.company.app.springboot.application;
 
-import com.company.app.StarterConfiguration;
+import com.company.app.core.StarterConfiguration;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.system.OutputCaptureExtension;

@@ -1,4 +1,4 @@
-package com.company.app.springboot.application.core.aop.logging.performance.testEntity;
+package com.company.app.core.aop.logging.performance.testEntity;
 
 import lombok.Setter;
 

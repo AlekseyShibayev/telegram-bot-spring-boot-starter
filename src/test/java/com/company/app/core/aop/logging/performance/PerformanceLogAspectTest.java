@@ -1,13 +1,11 @@
-package com.company.app.springboot.application.core.aop.logging.performance;
+package com.company.app.core.aop.logging.performance;
 
 import com.company.app.springboot.application.SpringBootApplicationTest;
-import com.company.app.springboot.application.core.aop.logging.performance.testEntity.ExperimentContextChild;
+import com.company.app.core.aop.logging.performance.testEntity.ExperimentContextChild;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.system.CapturedOutput;
-import org.springframework.boot.test.system.OutputCaptureExtension;
 
 import java.util.UUID;
 
