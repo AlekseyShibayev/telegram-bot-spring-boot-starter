@@ -17,11 +17,11 @@ class SerializationServiceImplTest {
 
 	private static final String FILE_NAME = "src/test/resources/core/lot_test.json";
 
-	private JsonSerializationTool<TestLot> serializationService;
+	private JsonSerializationTool<TestLot> jsonSerializationTool;
 
 	@BeforeEach
 	public void init() {
-		serializationService = new JsonSerializationToolImpl<>();
+		jsonSerializationTool = new JsonSerializationToolImpl<>();
 	}
 
 	private void cleanFile() throws IOException {
@@ -41,8 +41,8 @@ class SerializationServiceImplTest {
 		cleanFile();
 		List<TestLot> list = createLots();
 
-		serializationService.save(list, new File(FILE_NAME));
-		List<TestLot> load = serializationService.load(new File(FILE_NAME), TestLot.class);
+		jsonSerializationTool.save(list, new File(FILE_NAME));
+		List<TestLot> load = jsonSerializationTool.load(new File(FILE_NAME), TestLot.class);
 
 		Assertions.assertEquals(2, load.size());
 		Assertions.assertEquals(list.get(0).getPrice(), load.get(0).getPrice());
