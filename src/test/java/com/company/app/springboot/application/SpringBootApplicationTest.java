@@ -4,12 +4,12 @@ import com.company.app.core.StarterConfiguration;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.system.OutputCaptureExtension;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest(
 		classes = StarterConfiguration.class
 )
 @ExtendWith(OutputCaptureExtension.class)
-@ActiveProfiles("test")
+@TestPropertySource("/test.properties")
 public abstract class SpringBootApplicationTest {
 }
