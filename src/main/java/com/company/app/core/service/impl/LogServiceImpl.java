@@ -28,7 +28,7 @@ public class LogServiceImpl implements LogService {
 	@SneakyThrows
 	public byte[] getLogsAsZip() {
 		if (log.isDebugEnabled()) {
-			log.debug("Пробую положить файлы из папки [{}] в архив [{}].", PACKAGE_NAME, LOG_ZIP_FILE_NAME);
+			log.debug("Пробую положить все файлы из папки [{}] в архив [{}].", PACKAGE_NAME, LOG_ZIP_FILE_NAME);
 		}
 		List<File> files = dataExtractorService.getFiles(PACKAGE_NAME);
 		byte[] bytes = getBytes(files);
