@@ -15,4 +15,6 @@ public class TestLot {
 	private String name;
 	private String price;
 	private String discount;
+	private Price price;
+	private List<Desire> desires;
 }
