@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.TestComponent;
 
 /**
  * 4 примера использования  {@link PerformanceLogAnnotation}
- * Можно запустить тесты из {@link com.company.app.springboot.application.core.aop.logging.performance.PerformanceLogAspectTest}
+ * Можно запустить тесты из {@link PerformanceLogAspectTest}
  */
 @Slf4j
 @TestComponent

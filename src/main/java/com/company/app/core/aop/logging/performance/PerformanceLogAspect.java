@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit;
  * По дефолту - RANDOM.
  * Если GUID вытащить не может - используется RANDOM. Для поиска причин: <logger name=".*.GuidExtractorImpl" level="TRACE" additivity="false">
  * <p>
- * Аспект будет создан, если application.performanceLogAnnotation=true
+ * Аспект будет создан, если performance.log.annotation.enable=true
  * Логирование будет, если <logger name=".*.PerformanceLogAspect" level="DEBUG" additivity="false">
  * <p>
  *

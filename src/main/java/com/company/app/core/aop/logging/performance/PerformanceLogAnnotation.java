@@ -15,7 +15,7 @@ import java.lang.annotation.*;
  * Метод должен быть без аргументов.
  * <li> fieldName - поле объекта, взятого по number из сигнатуры, содержащее UUID или String в формате UUID.
  * </ul>
- * Примеры использования: {@link PerformanceLogAspectExecutorTest}
+ * Примеры использования: {@link PerformanceLogAspectExample}
  *
  * @author shibaev.aleksey 30.03.2023
  */
