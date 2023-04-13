@@ -1,16 +1,18 @@
 package com.company.app.core.aop.logging.performance.component.impl;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
-import com.company.app.core.aop.logging.performance.component.action.Action;
-import com.company.app.core.aop.logging.performance.component.api.ActionRegistry;
-import com.company.app.core.aop.logging.performance.component.api.GuidExtractor;
-import com.company.app.core.aop.logging.performance.component.api.Reflector;
+import com.company.app.core.aop.logging.performance.component.action.PerformanceLogAction;
+import com.company.app.core.aop.logging.performance.component.api.PerformanceLogActionRegistry;
+import com.company.app.core.aop.logging.performance.component.api.PerformanceLogGuidExtractor;
+import com.company.app.core.aop.logging.performance.component.api.PerformanceLogReflector;
 import com.google.common.base.Stopwatch;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -19,12 +21,12 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Component
-public class GuidExtractorImpl implements GuidExtractor {
+public class PerformanceLogGuidExtractorImpl implements PerformanceLogGuidExtractor {
 
 	@Autowired
-	Reflector reflector;
+	PerformanceLogReflector reflector;
 	@Autowired
-	ActionRegistry actionRegistry;
+	PerformanceLogActionRegistry actionRegistry;
 
 	public String extractGuid(ProceedingJoinPoint proceedingJoinPoint) {
 		String result = "";
@@ -32,7 +34,7 @@ public class GuidExtractorImpl implements GuidExtractor {
 
 		try {
 			PerformanceLogAnnotation annotation = reflector.getAnnotation(proceedingJoinPoint, PerformanceLogAnnotation.class);
-			Action action = actionRegistry.getAction(annotation.actionType());
+			PerformanceLogAction action = actionRegistry.getAction(annotation.actionType());
 			result = action.getGuid(proceedingJoinPoint, annotation);
 		} catch (Exception e) {
 			log.trace(e.getMessage(), e);

@@ -1,12 +1,12 @@
 package com.company.app.core.aop.logging.performance.component.action;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
-import com.company.app.core.aop.logging.performance.component.ActionType;
+import com.company.app.core.aop.logging.performance.component.config.PerformanceLogActionType;
 import org.aspectj.lang.ProceedingJoinPoint;
 
-public interface Action {
+public interface PerformanceLogAction {
 
-	ActionType getType();
+	PerformanceLogActionType getType();
 
 	String getGuid(ProceedingJoinPoint proceedingJoinPoint, PerformanceLogAnnotation annotation);
 

@@ -1,6 +1,6 @@
 package com.company.app.core.aop.logging.performance;
 
-import com.company.app.core.aop.logging.performance.component.ActionType;
+import com.company.app.core.aop.logging.performance.component.config.PerformanceLogActionType;
 
 import java.lang.annotation.*;
 
@@ -9,7 +9,7 @@ import java.lang.annotation.*;
  * <p>
  * Параметры для определения GUID:
  * <ul>
- * <li> actionType - это enum {@link ActionType}, в котором перечислены способы вытаскивания GUID
+ * <li> actionType - это enum {@link PerformanceLogActionType}, в котором перечислены способы вытаскивания GUID
  * <li> number - порядковый номер объекта в сигнатуре метода, начинается с 0.
  * <li> methodName - метод объекта, взятого по number из сигнатуры, возвращающего UUID или String в формате UUID.
  * Метод должен быть без аргументов.
@@ -24,7 +24,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PerformanceLogAnnotation {
 
-	ActionType actionType() default ActionType.RANDOM;
+	PerformanceLogActionType actionType() default PerformanceLogActionType.RANDOM;
 
 	String number() default "";
 

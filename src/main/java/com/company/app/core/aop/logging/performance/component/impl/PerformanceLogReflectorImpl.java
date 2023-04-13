@@ -1,6 +1,6 @@
 package com.company.app.core.aop.logging.performance.component.impl;
 
-import com.company.app.core.aop.logging.performance.component.api.Reflector;
+import com.company.app.core.aop.logging.performance.component.api.PerformanceLogReflector;
 import lombok.SneakyThrows;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * @author shibaev.aleksey 04.04.2023
  */
 @Component
-public class ReflectorImpl implements Reflector {
+public class PerformanceLogReflectorImpl implements PerformanceLogReflector {
 
 	/**
 	 * Случаи с перегрузками методов рассматривать не будем.

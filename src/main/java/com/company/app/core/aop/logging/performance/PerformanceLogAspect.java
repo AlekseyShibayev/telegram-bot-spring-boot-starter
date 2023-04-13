@@ -1,7 +1,7 @@
 package com.company.app.core.aop.logging.performance;
 
-import com.company.app.core.aop.logging.performance.component.ActionType;
-import com.company.app.core.aop.logging.performance.component.api.GuidExtractor;
+import com.company.app.core.aop.logging.performance.component.config.PerformanceLogActionType;
+import com.company.app.core.aop.logging.performance.component.api.PerformanceLogGuidExtractor;
 import com.google.common.base.Stopwatch;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
@@ -33,7 +34,7 @@ import java.util.concurrent.TimeUnit;
  * Для получения GUID - не надо переписывать сигнатуры существующих методов.
  * Аспект расковыривает GUID сам.
  * Способы получения GUID:
- * {@link ActionType}
+ * {@link PerformanceLogActionType}
  * По дефолту - RANDOM.
  * Если GUID вытащить не может - используется RANDOM. Для поиска причин: <logger name=".*.GuidExtractorImpl" level="TRACE" additivity="false">
  * <p>
@@ -46,11 +47,16 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Aspect
 @Component
-@ConditionalOnProperty(prefix = "telegram-bot-spring-boot-starter", name = "performanceLogAnnotation")
+@ConditionalOnProperty(prefix = "performance.log.annotation", name = "enable", havingValue = "true")
 public class PerformanceLogAspect {
 
 	@Autowired
-	GuidExtractor guidExtractor;
+	PerformanceLogGuidExtractor guidExtractor;
+
+	@PostConstruct
+	void init() {
+		log.debug("**********     создан [{}]     **********", this.getClass().getName());
+	}
 
 	@Pointcut("@annotation(PerformanceLogAnnotation)")
 	public void ifPerformanceLogAnnotation() {

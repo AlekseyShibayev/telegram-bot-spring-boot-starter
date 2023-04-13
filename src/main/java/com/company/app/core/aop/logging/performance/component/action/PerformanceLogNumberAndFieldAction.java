@@ -1,7 +1,7 @@
 package com.company.app.core.aop.logging.performance.component.action;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
-import com.company.app.core.aop.logging.performance.component.ActionType;
+import com.company.app.core.aop.logging.performance.component.config.PerformanceLogActionType;
 import lombok.SneakyThrows;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.stereotype.Component;
@@ -10,11 +10,11 @@ import java.lang.reflect.Field;
 import java.util.UUID;
 
 @Component
-public class NumberAndFieldAction extends AbstractAction {
+public class PerformanceLogNumberAndFieldAction extends PerformanceLogAbstractAction {
 
 	@Override
-	public ActionType getType() {
-		return ActionType.NUMBER_AND_FIELD;
+	public PerformanceLogActionType getType() {
+		return PerformanceLogActionType.NUMBER_AND_FIELD;
 	}
 
 	@SneakyThrows

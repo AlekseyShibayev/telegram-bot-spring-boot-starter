@@ -1,8 +1,8 @@
 package com.company.app.core.aop.logging.performance.component.impl;
 
-import com.company.app.core.aop.logging.performance.component.ActionType;
-import com.company.app.core.aop.logging.performance.component.action.Action;
-import com.company.app.core.aop.logging.performance.component.api.ActionRegistry;
+import com.company.app.core.aop.logging.performance.component.config.PerformanceLogActionType;
+import com.company.app.core.aop.logging.performance.component.action.PerformanceLogAction;
+import com.company.app.core.aop.logging.performance.component.api.PerformanceLogActionRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
@@ -13,11 +13,11 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class ActionRegistryImpl implements ActionRegistry {
+public class PerformanceLogActionRegistryImpl implements PerformanceLogActionRegistry {
 
 	@Autowired
-	List<Action> actionList;
-	private Map<ActionType, Action> actions;
+	List<PerformanceLogAction> actionList;
+	private Map<PerformanceLogActionType, PerformanceLogAction> actions;
 
 	@PostConstruct
 	public void init() {
@@ -25,8 +25,8 @@ public class ActionRegistryImpl implements ActionRegistry {
 	}
 
 	private void registerActions() {
-		actions = new EnumMap<>(ActionType.class);
-		for (Action action : actionList) {
+		actions = new EnumMap<>(PerformanceLogActionType.class);
+		for (PerformanceLogAction action : actionList) {
 			if (actions.containsKey(action.getType())) {
 				throw new DuplicateKeyException(action.getType().toString());
 			} else {
@@ -36,8 +36,8 @@ public class ActionRegistryImpl implements ActionRegistry {
 	}
 
 	@Override
-	public Action getAction(ActionType actionType) {
-		Action action = actions.get(actionType);
+	public PerformanceLogAction getAction(PerformanceLogActionType actionType) {
+		PerformanceLogAction action = actions.get(actionType);
 		if (action == null) {
 			throw new UnsupportedOperationException(actionType.toString());
 		} else {

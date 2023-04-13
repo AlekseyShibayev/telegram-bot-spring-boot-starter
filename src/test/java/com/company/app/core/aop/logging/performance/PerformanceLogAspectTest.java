@@ -17,7 +17,7 @@ import java.util.UUID;
 class PerformanceLogAspectTest extends SpringBootApplicationTest {
 
 	@Autowired
-	PerformanceLogAspectExecutorTest performanceLogAspectExecutor;
+	PerformanceLogAspectExample example;
 
 	private static final String GUID = "11111111-1111-1111-1111-111111111111";
 
@@ -25,7 +25,7 @@ class PerformanceLogAspectTest extends SpringBootApplicationTest {
 	void withEmptyAnnotationTest(CapturedOutput capture) {
 		ExperimentContextChild child = new ExperimentContextChild();
 		child.setGuid(UUID.fromString(GUID));
-		performanceLogAspectExecutor.anyMethodNameWithEmptyAnnotation(child);
+		example.anyMethodNameWithEmptyAnnotation(child);
 		Assertions.assertNotNull(capture.getOut());
 	}
 
@@ -33,7 +33,7 @@ class PerformanceLogAspectTest extends SpringBootApplicationTest {
 	void testWithGuidAsParameter(CapturedOutput capture) {
 		ExperimentContextChild child = new ExperimentContextChild();
 		child.setGuid(UUID.fromString(GUID));
-		performanceLogAspectExecutor.anyMethodNameWithGuidAsParameter(child, GUID);
+		example.anyMethodNameWithGuidAsParameter(child, GUID);
 		Assertions.assertTrue(capture.getOut().contains(GUID));
 	}
 
@@ -41,7 +41,7 @@ class PerformanceLogAspectTest extends SpringBootApplicationTest {
 	void testWithNumberAndMethodName(CapturedOutput capture) {
 		ExperimentContextChild child = new ExperimentContextChild();
 		child.setGuid(UUID.fromString(GUID));
-		performanceLogAspectExecutor.anyMethodNameWithNumberAndMethodName(child);
+		example.anyMethodNameWithNumberAndMethodName(child);
 		Assertions.assertTrue(capture.getOut().contains(GUID));
 	}
 
@@ -49,7 +49,7 @@ class PerformanceLogAspectTest extends SpringBootApplicationTest {
 	void testWithNumberAndFieldName(CapturedOutput capture) {
 		ExperimentContextChild child = new ExperimentContextChild();
 		child.setGuid(UUID.fromString(GUID));
-		performanceLogAspectExecutor.anyMethodNameWithNumberAndFieldName(child);
+		example.anyMethodNameWithNumberAndFieldName(child);
 		Assertions.assertTrue(capture.getOut().contains(GUID));
 	}
 }

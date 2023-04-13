@@ -1,18 +1,18 @@
 package com.company.app.core.aop.logging.performance.component.action;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
-import com.company.app.core.aop.logging.performance.component.ActionType;
+import com.company.app.core.aop.logging.performance.component.config.PerformanceLogActionType;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Component
-public class NumberAction extends AbstractAction {
+public class PerformanceLogNumberAction extends PerformanceLogAbstractAction {
 
 	@Override
-	public ActionType getType() {
-		return ActionType.NUMBER;
+	public PerformanceLogActionType getType() {
+		return PerformanceLogActionType.NUMBER;
 	}
 
 	@Override
