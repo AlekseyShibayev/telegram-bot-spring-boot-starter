@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+import java.util.Map;
+
 @Getter
 @Builder
 @NoArgsConstructor
@@ -15,6 +18,6 @@ public class TestLot {
 	private String name;
 	private String price;
 	private String discount;
-	private Price price;
-	private List<Desire> desires;
+	private ProductDescription productDescription;
+	private List<ProductProperty> productPropertiesList;
 }

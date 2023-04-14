@@ -15,36 +15,73 @@ import java.util.List;
 
 class SerializationServiceImplTest {
 
-	private static final String FILE_NAME = "src/test/resources/core/lot_test.json";
+    private static final String FILE_NAME = "src/test/resources/core/lot_test.json";
 
-	private JsonSerializationTool<TestLot> jsonSerializationTool;
+    private JsonSerializationTool<TestLot> jsonSerializationTool;
 
-	@BeforeEach
-	public void init() {
-		jsonSerializationTool = new JsonSerializationToolImpl<>();
-	}
+    @BeforeEach
+    public void init() {
+        jsonSerializationTool = new JsonSerializationToolImpl<>();
+    }
 
-	private void cleanFile() throws IOException {
-		FileUtils.write(new File(FILE_NAME), "", Charset.defaultCharset());
-	}
+    private void cleanFile() throws IOException {
+        FileUtils.write(new File(FILE_NAME), "", Charset.defaultCharset());
+    }
 
-	private List<TestLot> createLots() {
-		return ImmutableList.<TestLot>builder()
-				.add(TestLot.builder().id(1L).name("43409221").price("1500").discount("0.19").build())
-				.add(TestLot.builder().id(2L).name("15694225").price("5500").discount("0.17").build())
-				.build();
-	}
+    private List<TestLot> createLots() {
+        return ImmutableList.<TestLot>builder()
+                .add(TestLot.builder().id(1L).name("43409221").price("1500").discount("0.19").build())
+                .add(TestLot.builder().id(2L).name("15694225").price("5500").discount("0.17").build())
+                .build();
+    }
 
-	@SneakyThrows
-	@Test
-	void saveAndLoadTest() {
-		cleanFile();
-		List<TestLot> list = createLots();
+    @SneakyThrows
+    @Test
+    void saveAndLoadTest() {
+        cleanFile();
+        List<TestLot> list = createLots();
+//        List<TestLot> list = createLotsWithNestedFields();
 
-		jsonSerializationTool.save(list, new File(FILE_NAME));
-		List<TestLot> load = jsonSerializationTool.load(new File(FILE_NAME), TestLot.class);
+        jsonSerializationTool.save(list, new File(FILE_NAME));
+        List<TestLot> load = jsonSerializationTool.load(new File(FILE_NAME), TestLot.class);
 
-		Assertions.assertEquals(2, load.size());
-		Assertions.assertEquals(list.get(0).getPrice(), load.get(0).getPrice());
-	}
+        Assertions.assertEquals(2, load.size());
+        Assertions.assertEquals(list.get(0).getPrice(), load.get(0).getPrice());
+    }
+
+
+    @SneakyThrows
+    @Test
+    void nestedObjectsTest() {
+        cleanFile();
+        List<TestLot> listBefore = createLotsWithNestedFields();
+        jsonSerializationTool.save(listBefore, new File(FILE_NAME));
+        List<TestLot> listAfter = jsonSerializationTool.load(new File(FILE_NAME), TestLot.class);
+
+        Assertions.assertEquals(listBefore.size(), listAfter.size());
+        Assertions.assertEquals(listBefore.get(0).getPrice(), listAfter.get(0).getPrice());
+    }
+
+    private List<TestLot> createLotsWithNestedFields() {
+         List<ProductProperty> productPropertiesList = ImmutableList.<ProductProperty>builder()
+                 .add(ProductProperty.builder().property("Вес").build())
+                 .add(ProductProperty.builder().property("Размер").build())
+                 .add(ProductProperty.builder().property("Упаковка").build())
+                .build();
+        ProductDescription productDescription = new ProductDescription(
+                "полиуретан, натуральная кожа",
+                "Внимание! При выборе размера ориентируйтесь на размерную сетку, загруженную в фотографии. Российский размер не указывается на коробке. На коробке указан европейский размер. Lumberjack - итальянский обувной бренд для активных людей.. Итальянский бренд был разработан, чтобы привнести в городской стиль лучшее из туризма. Сочетание грубого фасона с использованием натуральных материалов тонкой обработки - главная отличительная особенность бренда. С момента своего запуска **Lumberjack** использует высококачественную кожу и уделяет пристальное внимание отделке своей продукции. Очень прочная, устойчивая, идеально подходящая как для города, так и для улицы обувь стала хитом среди любителей природы, мужчин, женщин и детей всех возрастов. Поклонники, которые любят их уникальный дизайн, ценят преимущества бренда- подлинность, качество, долговечность и уважение к окружающей среде.\")\n"
+        );
+        return ImmutableList.<TestLot>builder()
+                .add(TestLot.builder()
+                        .id(2L)
+                        .name("15694225")
+                        .price("5500")
+                        .discount("0.17")
+                        .productDescription(productDescription)
+                        .productPropertiesList(productPropertiesList)
+
+                        .build())
+                .build();
+    }
 }
