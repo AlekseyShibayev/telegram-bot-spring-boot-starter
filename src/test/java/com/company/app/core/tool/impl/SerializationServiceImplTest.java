@@ -40,7 +40,6 @@ class SerializationServiceImplTest {
     void saveAndLoadTest() {
         cleanFile();
         List<TestLot> list = createLots();
-//        List<TestLot> list = createLotsWithNestedFields();
 
         jsonSerializationTool.save(list, new File(FILE_NAME));
         List<TestLot> load = jsonSerializationTool.load(new File(FILE_NAME), TestLot.class);
@@ -54,12 +53,12 @@ class SerializationServiceImplTest {
     @Test
     void nestedObjectsTest() {
         cleanFile();
-        List<TestLot> listBefore = createLotsWithNestedFields();
-        jsonSerializationTool.save(listBefore, new File(FILE_NAME));
-        List<TestLot> listAfter = jsonSerializationTool.load(new File(FILE_NAME), TestLot.class);
+        List<TestLot> save = createLotsWithNestedFields();
+        jsonSerializationTool.save(save, new File(FILE_NAME));
+        List<TestLot> load = jsonSerializationTool.load(new File(FILE_NAME), TestLot.class);
 
-        Assertions.assertEquals(listBefore.size(), listAfter.size());
-        Assertions.assertEquals(listBefore.get(0).getPrice(), listAfter.get(0).getPrice());
+        Assertions.assertEquals(save.size(), load.size());
+        Assertions.assertEquals(save.get(0).getPrice(), load.get(0).getPrice());
     }
 
     private List<TestLot> createLotsWithNestedFields() {
@@ -68,20 +67,23 @@ class SerializationServiceImplTest {
                  .add(ProductProperty.builder().property("Размер").build())
                  .add(ProductProperty.builder().property("Упаковка").build())
                 .build();
+
         ProductDescription productDescription = new ProductDescription(
                 "полиуретан, натуральная кожа",
                 "Внимание! При выборе размера ориентируйтесь на размерную сетку, загруженную в фотографии. Российский размер не указывается на коробке. На коробке указан европейский размер. Lumberjack - итальянский обувной бренд для активных людей.. Итальянский бренд был разработан, чтобы привнести в городской стиль лучшее из туризма. Сочетание грубого фасона с использованием натуральных материалов тонкой обработки - главная отличительная особенность бренда. С момента своего запуска **Lumberjack** использует высококачественную кожу и уделяет пристальное внимание отделке своей продукции. Очень прочная, устойчивая, идеально подходящая как для города, так и для улицы обувь стала хитом среди любителей природы, мужчин, женщин и детей всех возрастов. Поклонники, которые любят их уникальный дизайн, ценят преимущества бренда- подлинность, качество, долговечность и уважение к окружающей среде.\")\n"
         );
-        return ImmutableList.<TestLot>builder()
-                .add(TestLot.builder()
-                        .id(2L)
-                        .name("15694225")
-                        .price("5500")
-                        .discount("0.17")
-                        .productDescription(productDescription)
-                        .productPropertiesList(productPropertiesList)
 
-                        .build())
+        TestLot testLot = TestLot.builder()
+                .id(2L)
+                .name("15694225")
+                .price("5500")
+                .discount("0.17")
+                .productDescription(productDescription)
+                .productPropertiesList(productPropertiesList)
+                .build();
+
+        return ImmutableList.<TestLot>builder()
+                .add(testLot)
                 .build();
     }
 }
