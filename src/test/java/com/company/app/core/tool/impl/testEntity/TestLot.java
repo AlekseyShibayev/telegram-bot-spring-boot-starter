@@ -1,9 +1,6 @@
-package com.company.app.core.tool.impl;
+package com.company.app.core.tool.impl.testEntity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -11,6 +8,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class TestLot {
 
 	private Long id;

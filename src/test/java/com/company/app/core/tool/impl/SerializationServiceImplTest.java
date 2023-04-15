@@ -1,9 +1,14 @@
 package com.company.app.core.tool.impl;
 
 import com.company.app.core.tool.api.JsonSerializationTool;
+import com.company.app.core.tool.impl.testEntity.ProductDescription;
+import com.company.app.core.tool.impl.testEntity.ProductProperty;
+import com.company.app.core.tool.impl.testEntity.TestLot;
 import com.google.common.collect.ImmutableList;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,75 +20,81 @@ import java.util.List;
 
 class SerializationServiceImplTest {
 
-    private static final String FILE_NAME = "src/test/resources/core/lot_test.json";
+	private static final String FILE_NAME = "src/test/resources/core/lot_test.json";
 
-    private JsonSerializationTool<TestLot> jsonSerializationTool;
+	private JsonSerializationTool<TestLot> jsonSerializationTool;
 
-    @BeforeEach
-    public void init() {
-        jsonSerializationTool = new JsonSerializationToolImpl<>();
-    }
+	@BeforeEach
+	public void init() {
+		jsonSerializationTool = new JsonSerializationToolImpl<>();
+	}
 
-    private void cleanFile() throws IOException {
-        FileUtils.write(new File(FILE_NAME), "", Charset.defaultCharset());
-    }
+	private void cleanFile() throws IOException {
+		FileUtils.write(new File(FILE_NAME), "", Charset.defaultCharset());
+	}
 
-    private List<TestLot> createLots() {
-        return ImmutableList.<TestLot>builder()
-                .add(TestLot.builder().id(1L).name("43409221").price("1500").discount("0.19").build())
-                .add(TestLot.builder().id(2L).name("15694225").price("5500").discount("0.17").build())
-                .build();
-    }
+	@SneakyThrows
+	@Test
+	void saveAndLoadTest() {
+		cleanFile();
+		List<TestLot> before = createLots();
 
-    @SneakyThrows
-    @Test
-    void saveAndLoadTest() {
-        cleanFile();
-        List<TestLot> list = createLots();
+		jsonSerializationTool.save(before, new File(FILE_NAME));
+		List<TestLot> after = jsonSerializationTool.load(new File(FILE_NAME), TestLot.class);
 
-        jsonSerializationTool.save(list, new File(FILE_NAME));
-        List<TestLot> load = jsonSerializationTool.load(new File(FILE_NAME), TestLot.class);
+		Assertions.assertEquals(2, after.size());
+		Assertions.assertEquals(before.get(0).getPrice(), after.get(0).getPrice());
+		Assertions.assertIterableEquals(before, after);
+	}
 
-        Assertions.assertEquals(2, load.size());
-        Assertions.assertEquals(list.get(0).getPrice(), load.get(0).getPrice());
-    }
+	private List<TestLot> createLots() {
+		return ImmutableList.<TestLot>builder()
+				.add(TestLot.builder().id(1L).name("43409221").price("1500").discount("0.19").build())
+				.add(TestLot.builder().id(2L).name("15694225").price("5500").discount("0.17").build())
+				.build();
+	}
 
+	@SneakyThrows
+	@Test
+	void nestedObjectsTest() {
+		cleanFile();
+		List<TestLot> before = createLotsWithNestedFields();
 
-    @SneakyThrows
-    @Test
-    void nestedObjectsTest() {
-        cleanFile();
-        List<TestLot> save = createLotsWithNestedFields();
-        jsonSerializationTool.save(save, new File(FILE_NAME));
-        List<TestLot> load = jsonSerializationTool.load(new File(FILE_NAME), TestLot.class);
+		jsonSerializationTool.save(before, new File(FILE_NAME));
+		List<TestLot> after = jsonSerializationTool.load(new File(FILE_NAME), TestLot.class);
 
-        Assertions.assertEquals(save.size(), load.size());
-        Assertions.assertEquals(save.get(0).getPrice(), load.get(0).getPrice());
-    }
+		MatcherAssert.assertThat(before.size(), IsEqual.equalTo(after.size()));
+		Assertions.assertEquals(before.size(), after.size());
+		Assertions.assertEquals(before.get(0).getPrice(), after.get(0).getPrice());
+		Assertions.assertIterableEquals(before, after);
+	}
 
-    private List<TestLot> createLotsWithNestedFields() {
-         List<ProductProperty> productPropertiesList = ImmutableList.<ProductProperty>builder()
-                 .add(ProductProperty.builder().property("Вес").build())
-                 .add(ProductProperty.builder().property("Размер").build())
-                 .add(ProductProperty.builder().property("Упаковка").build())
-                .build();
-
-        ProductDescription productDescription = new ProductDescription(
-                "полиуретан, натуральная кожа",
-                "Внимание! При выборе размера ориентируйтесь на размерную сетку, загруженную в фотографии. Российский размер не указывается на коробке. На коробке указан европейский размер. Lumberjack - итальянский обувной бренд для активных людей.. Итальянский бренд был разработан, чтобы привнести в городской стиль лучшее из туризма. Сочетание грубого фасона с использованием натуральных материалов тонкой обработки - главная отличительная особенность бренда. С момента своего запуска **Lumberjack** использует высококачественную кожу и уделяет пристальное внимание отделке своей продукции. Очень прочная, устойчивая, идеально подходящая как для города, так и для улицы обувь стала хитом среди любителей природы, мужчин, женщин и детей всех возрастов. Поклонники, которые любят их уникальный дизайн, ценят преимущества бренда- подлинность, качество, долговечность и уважение к окружающей среде.\")\n"
-        );
-
-        TestLot testLot = TestLot.builder()
-                .id(2L)
-                .name("15694225")
-                .price("5500")
-                .discount("0.17")
-                .productDescription(productDescription)
-                .productPropertiesList(productPropertiesList)
-                .build();
-
-        return ImmutableList.<TestLot>builder()
-                .add(testLot)
-                .build();
-    }
+	private List<TestLot> createLotsWithNestedFields() {
+		return ImmutableList.<TestLot>builder()
+				.add(TestLot.builder()
+						.id(2L)
+						.name("2")
+						.price("2")
+						.discount("0.17")
+						.productDescription(ProductDescription.builder().description("2").composition("2").build())
+						.productPropertiesList(ImmutableList.<ProductProperty>builder()
+								.add(ProductProperty.builder().property("2").build())
+								.add(ProductProperty.builder().property("2").build())
+								.add(ProductProperty.builder().property("2").build())
+								.build())
+						.build())
+				.add(TestLot.builder()
+						.id(3L)
+						.name("3")
+						.price("3")
+						.discount("0.17")
+						.productDescription(ProductDescription.builder().description("3").composition("3").build())
+						.productPropertiesList(ImmutableList.<ProductProperty>builder()
+								.add(ProductProperty.builder().property("3").build())
+								.add(ProductProperty.builder().property("3").build())
+								.add(ProductProperty.builder().property("3").build())
+								.build())
+						.build())
+				.build();
+	}
 }

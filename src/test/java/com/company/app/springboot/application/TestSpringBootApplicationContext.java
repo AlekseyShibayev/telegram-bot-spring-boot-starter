@@ -8,6 +8,7 @@ import org.springframework.test.context.TestPropertySource;
 
 /**
  * yml можно указать профилем
+ *
  * @ActiveProfiles("test") + application-test.yml
  * или
  * вот так, но я не проверял еще:

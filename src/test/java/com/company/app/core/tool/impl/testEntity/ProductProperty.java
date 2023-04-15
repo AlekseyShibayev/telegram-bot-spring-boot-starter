@@ -1,4 +1,4 @@
-package com.company.app.core.tool.impl;
+package com.company.app.core.tool.impl.testEntity;
 
 import lombok.*;
 
@@ -7,7 +7,8 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class ProductProperty {
 
-    private String property;
+	private String property;
 }
