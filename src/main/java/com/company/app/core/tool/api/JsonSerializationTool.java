@@ -12,6 +12,8 @@ public interface JsonSerializationTool<T> {
 
 	String asString(List<T> list);
 
+	String asString(Object obj);
+
 	List<T> load(File file, Class<T> type);
 
 	List<T> load(String string, Class<T> type);

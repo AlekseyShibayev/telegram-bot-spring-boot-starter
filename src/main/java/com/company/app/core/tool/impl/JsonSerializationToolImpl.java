@@ -30,6 +30,13 @@ public class JsonSerializationToolImpl<T> implements JsonSerializationTool<T> {
 
 	@SneakyThrows
 	@Override
+	public String asString(Object obj) {
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(obj);
+	}
+
+	@SneakyThrows
+	@Override
 	public List<T> load(File file, Class<T> type) {
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.readValue(file, getCollectionType(type, mapper));
