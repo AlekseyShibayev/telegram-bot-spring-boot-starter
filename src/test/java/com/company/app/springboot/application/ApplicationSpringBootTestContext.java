@@ -19,5 +19,5 @@ import org.springframework.test.context.TestPropertySource;
 )
 @ExtendWith(OutputCaptureExtension.class)
 @TestPropertySource("/test.properties")
-public abstract class TestSpringBootApplicationContext {
+public abstract class ApplicationSpringBootTestContext {
 }
