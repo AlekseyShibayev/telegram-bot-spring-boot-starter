@@ -10,21 +10,23 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.List;
 
-class DataExtractorServiceImplTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class DataExtractorToolImplTest {
 
 	private static final String FILE_NAME = "core/JsonObjectExample.html";
 
-	private DataExtractorToolImpl dataExtractorService;
+	private DataExtractorToolImpl dataExtractorTool;
 
 	@BeforeEach
 	public void init() {
-		dataExtractorService = new DataExtractorToolImpl();
+		dataExtractorTool = new DataExtractorToolImpl();
 	}
 
 	@SneakyThrows
 	@Test
 	void jsonSearchTest() {
-		String string = dataExtractorService.getFileAsString(FILE_NAME);
+		String string = dataExtractorTool.getFileAsString(FILE_NAME);
 		JSONObject jsonObject = new JSONObject(string);
 		JsonSearcher jsonSearcher = new JsonSearcher();
 		jsonSearcher.doRecursiveSearch(jsonObject, "activityAmount");
@@ -36,7 +38,7 @@ class DataExtractorServiceImplTest {
 
 	@Test
 	void getFiles() {
-		List<File> files = dataExtractorService.getFiles("src/test/resources/core/forGetFilesTest");
+		List<File> files = dataExtractorTool.getFiles("src/test/resources/core/forGetFilesTest");
 		Assertions.assertEquals(3, files.size());
 	}
 }

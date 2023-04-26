@@ -84,8 +84,8 @@ public class DataExtractorToolImpl implements DataExtractorTool {
 		return response.toString();
 	}
 
-	private void fillResponse(HttpURLConnection con, StringBuilder response) throws IOException {
-		try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
+	private void fillResponse(HttpURLConnection connection, StringBuilder response) throws IOException {
+		try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
 			String inputLine;
 			while ((inputLine = in.readLine()) != null) {
 				response.append(inputLine);
