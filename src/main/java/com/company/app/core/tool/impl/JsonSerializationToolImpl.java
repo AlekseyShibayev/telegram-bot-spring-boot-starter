@@ -66,6 +66,16 @@ public class JsonSerializationToolImpl<T> implements JsonSerializationTool<T> {
 		return list;
 	}
 
+	@Override
+	public T loadOne(InputStream inputStream, Class<T> type) {
+		throw  new UnsupportedOperationException();
+	}
+
+	@Override
+	public T loadOne(Resource resource, Class<T> type) {
+		throw  new UnsupportedOperationException();
+	}
+
 	private CollectionType getCollectionType(Class<T> type, ObjectMapper mapper) {
 		return mapper.getTypeFactory().constructCollectionType(List.class, type);
 	}

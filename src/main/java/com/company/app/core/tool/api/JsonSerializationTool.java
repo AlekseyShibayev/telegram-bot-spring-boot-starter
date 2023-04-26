@@ -21,4 +21,8 @@ public interface JsonSerializationTool<T> {
 	List<T> load(InputStream inputStream, Class<T> type);
 
 	List<T> load(Resource resource, Class<T> type);
+
+	T loadOne(InputStream inputStream, Class<T> type);
+
+	T loadOne(Resource resource, Class<T> type);
 }
