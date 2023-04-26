@@ -5,7 +5,9 @@ import lombok.Setter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,6 +15,7 @@ public class JsonSearcher {
 
 	private JSONObject result;
 	private JSONArray resultArray;
+	private List<String> strings = new ArrayList<>();
 	private int counter;
 
 	public void doRecursiveSearch(JSONObject jsonObject, String search) {
@@ -44,6 +47,9 @@ public class JsonSearcher {
 				this.setResult((JSONObject) jsonObject.get(key));
 			} else if (object instanceof JSONArray) {
 				this.setResultArray((JSONArray) jsonObject.get(key));
+			} else if (object instanceof String) {
+				this.strings.add(String.valueOf(object));
+				return;
 			}
 			this.setCounter(counter++);
 		}

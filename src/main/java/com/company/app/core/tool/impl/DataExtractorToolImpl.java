@@ -40,6 +40,13 @@ public class DataExtractorToolImpl implements DataExtractorTool {
 	}
 
 	@Override
+	public String getFirstString(JSONObject jsonObject, String searchString) {
+		JsonSearcher jsonSearcher = new JsonSearcher();
+		jsonSearcher.doRecursiveSearch(jsonObject, searchString);
+		return jsonSearcher.getStrings().get(0);
+	}
+
+	@Override
 	@SneakyThrows
 	public String getFileAsString(String fileName) {
 		String result;

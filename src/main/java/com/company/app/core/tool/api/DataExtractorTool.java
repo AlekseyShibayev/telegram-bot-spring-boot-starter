@@ -20,4 +20,6 @@ public interface DataExtractorTool {
 	JSONObject getJsonObject(JSONObject jsonObject, String searchString);
 
 	JSONArray getJsonArray(JSONObject jsonObject, String searchString);
+
+	String getFirstString(JSONObject jsonObject, String searchString);
 }
