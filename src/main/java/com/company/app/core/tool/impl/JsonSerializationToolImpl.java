@@ -1,6 +1,7 @@
 package com.company.app.core.tool.impl;
 
 import com.company.app.core.tool.api.JsonSerializationTool;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import lombok.SneakyThrows;
@@ -64,6 +65,19 @@ public class JsonSerializationToolImpl<T> implements JsonSerializationTool<T> {
 			list = this.load(inputStream, type);
 		}
 		return list;
+	}
+
+	@Override
+	public T loadOne(File file, Class<T> type) {
+		throw  new UnsupportedOperationException();
+	}
+
+	@SneakyThrows
+	@Override
+	public T loadOne(String string, Class<T> type) {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		return mapper.readValue(string, type);
 	}
 
 	@Override

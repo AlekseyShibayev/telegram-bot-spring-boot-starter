@@ -4,6 +4,7 @@ import com.company.app.core.tool.api.JsonSerializationTool;
 import com.company.app.core.tool.impl.testEntity.ProductDescription;
 import com.company.app.core.tool.impl.testEntity.ProductProperty;
 import com.company.app.core.tool.impl.testEntity.TestLot;
+import com.company.app.core.tool.impl.wbresponse.data.Response;
 import com.google.common.collect.ImmutableList;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
 
-class SerializationServiceImplTest {
+class JsonSerializationToolImplTest {
 
 	private static final String FILE_NAME = "src/test/resources/core/lot_test.json";
 
@@ -96,5 +97,19 @@ class SerializationServiceImplTest {
 								.build())
 						.build())
 				.build();
+	}
+
+	@SneakyThrows
+	@Test
+	void temp_name_test() {
+		DataExtractorToolImpl dataExtractorTool = new DataExtractorToolImpl();
+		JsonSerializationToolImpl<Response> tool = new JsonSerializationToolImpl<>();
+		String fileAsString = dataExtractorTool.getFileAsString("core/tool/wb_response_example.json");
+
+		Response response = tool.loadOne(fileAsString, Response.class);
+
+		Assertions.assertNotNull(response);
+		Assertions.assertNotNull(response.getData().getProducts());
+		Assertions.assertEquals(2, response.getData().getProducts().size());
 	}
 }
