@@ -16,6 +16,10 @@ public class LogUtils {
 		log.error(message, e.getMessage(), e);
 	}
 
+	public static void doExceptionLog(Exception e, String message) {
+		log.error(message, e.getMessage(), e);
+	}
+
 	public static void doExceptionLog(Throwable e) {
 		log.error(e.getMessage(), e);
 	}
