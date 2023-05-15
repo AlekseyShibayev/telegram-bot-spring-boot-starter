@@ -15,14 +15,15 @@ public class CaptchaFighter {
 	@SneakyThrows
 	public static void fight(int of, int to) {
 		int sleepTime = of + getRandomInt(to - of);
-		doLog(sleepTime);
+		doLog(of, to, sleepTime);
 		Thread.sleep(sleepTime);
 	}
 
-	private static void doLog(int sleepTime) {
+	private static void doLog(int of, int to, int sleepTime) {
 		if (log.isDebugEnabled()) {
 			Thread thread = Thread.currentThread();
-			log.debug("[{}]: Сплю [{}] ms.", thread.getName(), sleepTime);
+			log.debug("[{}]: Сплю от [{}] ms до [{}] ms: [{}] ms.",
+					thread.getName(), of, to, sleepTime);
 		}
 	}
 
