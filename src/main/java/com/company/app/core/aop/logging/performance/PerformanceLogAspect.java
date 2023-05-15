@@ -1,7 +1,7 @@
 package com.company.app.core.aop.logging.performance;
 
-import com.company.app.core.aop.logging.performance.component.config.PerformanceLogActionType;
 import com.company.app.core.aop.logging.performance.component.api.PerformanceLogGuidExtractor;
+import com.company.app.core.aop.logging.performance.component.config.PerformanceLogActionType;
 import com.google.common.base.Stopwatch;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

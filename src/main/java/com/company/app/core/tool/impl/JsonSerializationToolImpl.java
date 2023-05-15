@@ -69,7 +69,7 @@ public class JsonSerializationToolImpl<T> implements JsonSerializationTool<T> {
 
 	@Override
 	public T loadOne(File file, Class<T> type) {
-		throw  new UnsupportedOperationException();
+		throw new UnsupportedOperationException();
 	}
 
 	@SneakyThrows
@@ -82,12 +82,12 @@ public class JsonSerializationToolImpl<T> implements JsonSerializationTool<T> {
 
 	@Override
 	public T loadOne(InputStream inputStream, Class<T> type) {
-		throw  new UnsupportedOperationException();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public T loadOne(Resource resource, Class<T> type) {
-		throw  new UnsupportedOperationException();
+		throw new UnsupportedOperationException();
 	}
 
 	private CollectionType getCollectionType(Class<T> type, ObjectMapper mapper) {

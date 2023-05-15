@@ -15,13 +15,19 @@ public class CaptchaFighter {
 	@SneakyThrows
 	public static void fight(int of, int to) {
 		int sleepTime = of + getRandomInt(to - of);
-		log.debug("Сплю [{}] ms.", sleepTime);
+		doLog(sleepTime);
 		Thread.sleep(sleepTime);
+	}
+
+	private static void doLog(int sleepTime) {
+		if (log.isDebugEnabled()) {
+			Thread thread = Thread.currentThread();
+			log.debug("[{}]: Сплю [{}] ms.", thread.getName(), sleepTime);
+		}
 	}
 
 	private static int getRandomInt(int required) {
 		int n = RANDOM.nextInt(required);
-		n += 1;
-		return n;
+		return n + 1;
 	}
 }

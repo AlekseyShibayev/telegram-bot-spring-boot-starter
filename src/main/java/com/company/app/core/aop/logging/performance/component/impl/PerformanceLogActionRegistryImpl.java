@@ -1,8 +1,8 @@
 package com.company.app.core.aop.logging.performance.component.impl;
 
-import com.company.app.core.aop.logging.performance.component.config.PerformanceLogActionType;
 import com.company.app.core.aop.logging.performance.component.action.PerformanceLogAction;
 import com.company.app.core.aop.logging.performance.component.api.PerformanceLogActionRegistry;
+import com.company.app.core.aop.logging.performance.component.config.PerformanceLogActionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
