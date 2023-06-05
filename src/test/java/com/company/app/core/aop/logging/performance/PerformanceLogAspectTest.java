@@ -1,7 +1,7 @@
 package com.company.app.core.aop.logging.performance;
 
 import com.company.app.core.aop.logging.performance.testEntity.ExperimentContextChild;
-import com.company.app.springboot.application.ApplicationSpringBootTestContext;
+import com.company.app.springboot.application.SpringBootTestApplicationContext;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.UUID;
  * кроме "1. anyMethodNameWithEmptyAnnotation"
  * должны вытащить GUID.
  */
-class PerformanceLogAspectTest extends ApplicationSpringBootTestContext {
+class PerformanceLogAspectTest extends SpringBootTestApplicationContext {
 
 	@Autowired
 	PerformanceLogAspectExample example;
