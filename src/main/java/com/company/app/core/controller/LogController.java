@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/log")
 public class LogController {
 
-	@Autowired
-	LogService logService;
+    @Autowired
+    LogService logService;
 
-	/**
-	 * Вытаскивает логи приложения, в виде архива.
-	 * пример запроса: http://localhost:8080/log/logsAsZip
-	 */
-	@GetMapping(value = "/logsAsZip", produces = "application/zip")
-	public ResponseEntity<byte[]> getLogsAsZip() {
-		return ResponseEntity.ok(logService.getLogsAsZip());
-	}
+    /**
+     * Вытаскивает логи приложения, в виде архива.
+     * пример запроса: http://localhost:8080/log/logsAsZip
+     */
+    @GetMapping(value = "/logsAsZip", produces = "application/zip")
+    public ResponseEntity<byte[]> getLogsAsZip() {
+        return ResponseEntity.ok(logService.getLogsAsZip());
+    }
 }

@@ -10,19 +10,19 @@ import java.util.UUID;
 @Component
 public class PerformanceLogNumberAction extends PerformanceLogAbstractAction {
 
-	@Override
-	public PerformanceLogActionType getType() {
-		return PerformanceLogActionType.NUMBER;
-	}
+    @Override
+    public PerformanceLogActionType getType() {
+        return PerformanceLogActionType.NUMBER;
+    }
 
-	@Override
-	public String getGuid(ProceedingJoinPoint proceedingJoinPoint, PerformanceLogAnnotation annotation) {
-		return getGuidBySignatureParameter(proceedingJoinPoint, annotation.number());
-	}
+    @Override
+    public String getGuid(ProceedingJoinPoint proceedingJoinPoint, PerformanceLogAnnotation annotation) {
+        return getGuidBySignatureParameter(proceedingJoinPoint, annotation.number());
+    }
 
-	private String getGuidBySignatureParameter(ProceedingJoinPoint proceedingJoinPoint, String number) {
-		Object originalObjectFromSignature = reflector.getArg(proceedingJoinPoint, number);
-		UUID uuid = UUID.fromString(String.valueOf(originalObjectFromSignature));
-		return uuid.toString();
-	}
+    private String getGuidBySignatureParameter(ProceedingJoinPoint proceedingJoinPoint, String number) {
+        Object originalObjectFromSignature = reflector.getArg(proceedingJoinPoint, number);
+        UUID uuid = UUID.fromString(String.valueOf(originalObjectFromSignature));
+        return uuid.toString();
+    }
 }

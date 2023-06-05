@@ -10,13 +10,13 @@ import java.util.UUID;
 @Component
 public class PerformanceLogRandomAction extends PerformanceLogAbstractAction {
 
-	@Override
-	public PerformanceLogActionType getType() {
-		return PerformanceLogActionType.RANDOM;
-	}
+    @Override
+    public PerformanceLogActionType getType() {
+        return PerformanceLogActionType.RANDOM;
+    }
 
-	@Override
-	public String getGuid(ProceedingJoinPoint proceedingJoinPoint, PerformanceLogAnnotation annotation) {
-		return UUID.randomUUID().toString();
-	}
+    @Override
+    public String getGuid(ProceedingJoinPoint proceedingJoinPoint, PerformanceLogAnnotation annotation) {
+        return UUID.randomUUID().toString();
+    }
 }

@@ -10,5 +10,5 @@ import lombok.*;
 @EqualsAndHashCode
 public class ProductProperty {
 
-	private String property;
+    private String property;
 }

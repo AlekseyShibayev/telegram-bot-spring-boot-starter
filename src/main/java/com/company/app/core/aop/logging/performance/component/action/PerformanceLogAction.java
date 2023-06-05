@@ -6,16 +6,16 @@ import org.aspectj.lang.ProceedingJoinPoint;
 
 public interface PerformanceLogAction {
 
-	PerformanceLogActionType getType();
+    PerformanceLogActionType getType();
 
-	String getGuid(ProceedingJoinPoint proceedingJoinPoint, PerformanceLogAnnotation annotation);
+    String getGuid(ProceedingJoinPoint proceedingJoinPoint, PerformanceLogAnnotation annotation);
 
-	/**
-	 * Это конечно красивое решение, но:
-	 * 1. Оно нарушает S (Single Responsibility Principle) - Action кроме добывания GUID теперь ещё ответственный за свою регистрацию.
-	 * 2. Теряется смысл IoC, ответственность за создание и настройку бинов, которые мы отдали Spring'у.
-	 * 3. Если использовать lazy в тестах, то Action будет создан, но его никто не дёрнет, он не зарегистрируется в регистратуре и мапа<Action> будет пуста.
-	 */
+    /**
+     * Это конечно красивое решение, но:
+     * 1. Оно нарушает S (Single Responsibility Principle) - Action кроме добывания GUID теперь ещё ответственный за свою регистрацию.
+     * 2. Теряется смысл IoC, ответственность за создание и настройку бинов, которые мы отдали Spring'у.
+     * 3. Если использовать lazy в тестах, то Action будет создан, но его никто не дёрнет, он не зарегистрируется в регистратуре и мапа<Action> будет пуста.
+     */
 //	@Autowired
 //	default void registerMyself(ActionRegistry actionRegistry) {
 //		actionRegistry.registerAction(this);

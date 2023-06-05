@@ -21,26 +21,26 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class PerformanceLogGuidExtractorImpl implements PerformanceLogGuidExtractor {
 
-	@Autowired
-	PerformanceLogReflector reflector;
-	@Autowired
-	PerformanceLogActionRegistry actionRegistry;
+    @Autowired
+    PerformanceLogReflector reflector;
+    @Autowired
+    PerformanceLogActionRegistry actionRegistry;
 
-	public String extractGuid(ProceedingJoinPoint proceedingJoinPoint) {
-		String result = "";
-		Stopwatch stopwatch = Stopwatch.createStarted();
+    public String extractGuid(ProceedingJoinPoint proceedingJoinPoint) {
+        String result = "";
+        Stopwatch stopwatch = Stopwatch.createStarted();
 
-		try {
-			PerformanceLogAnnotation annotation = reflector.getAnnotation(proceedingJoinPoint, PerformanceLogAnnotation.class);
-			PerformanceLogAction action = actionRegistry.getAction(annotation.actionType());
-			result = action.getGuid(proceedingJoinPoint, annotation);
-		} catch (Exception e) {
-			log.trace(e.getMessage(), e);
-			result = UUID.randomUUID().toString();
-		} finally {
-			stopwatch.stop();
-			log.debug("[{}] выковыривание guid заняло [{}] ms.", result, stopwatch.elapsed(TimeUnit.MILLISECONDS));
-		}
-		return result;
-	}
+        try {
+            PerformanceLogAnnotation annotation = reflector.getAnnotation(proceedingJoinPoint, PerformanceLogAnnotation.class);
+            PerformanceLogAction action = actionRegistry.getAction(annotation.actionType());
+            result = action.getGuid(proceedingJoinPoint, annotation);
+        } catch (Exception e) {
+            log.trace(e.getMessage(), e);
+            result = UUID.randomUUID().toString();
+        } finally {
+            stopwatch.stop();
+            log.debug("[{}] выковыривание guid заняло [{}] ms.", result, stopwatch.elapsed(TimeUnit.MILLISECONDS));
+        }
+        return result;
+    }
 }

@@ -21,15 +21,15 @@ import javax.annotation.PostConstruct;
 
 @Slf4j
 @SpringBootTest(
-		classes = StarterConfiguration.class
+        classes = StarterConfiguration.class
 )
 @ExtendWith(OutputCaptureExtension.class)
 @TestPropertySource("/test.properties")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class SpringBootTestApplicationContext {
 
-	@PostConstruct
-	void init() {
-		log.debug("**********     запущена группа тестов всего приложения     **********");
-	}
+    @PostConstruct
+    void init() {
+        log.debug("**********     запущена группа тестов всего приложения     **********");
+    }
 }

@@ -12,22 +12,22 @@ import java.util.UUID;
 @Component
 public class PerformanceLogNumberAndMethodAction extends PerformanceLogAbstractAction {
 
-	@Override
-	public PerformanceLogActionType getType() {
-		return PerformanceLogActionType.NUMBER_AND_METHOD;
-	}
+    @Override
+    public PerformanceLogActionType getType() {
+        return PerformanceLogActionType.NUMBER_AND_METHOD;
+    }
 
-	@SneakyThrows
-	@Override
-	public String getGuid(ProceedingJoinPoint proceedingJoinPoint, PerformanceLogAnnotation annotation) {
-		String methodName = annotation.methodName();
-		Object originalObjectFromSignature = reflector.getArg(proceedingJoinPoint, annotation.number());
+    @SneakyThrows
+    @Override
+    public String getGuid(ProceedingJoinPoint proceedingJoinPoint, PerformanceLogAnnotation annotation) {
+        String methodName = annotation.methodName();
+        Object originalObjectFromSignature = reflector.getArg(proceedingJoinPoint, annotation.number());
 
-		Method method = reflector.recursiveMethodSearch(originalObjectFromSignature.getClass(), methodName);
-		method.trySetAccessible();
-		Object value = method.invoke(originalObjectFromSignature);
+        Method method = reflector.recursiveMethodSearch(originalObjectFromSignature.getClass(), methodName);
+        method.trySetAccessible();
+        Object value = method.invoke(originalObjectFromSignature);
 
-		UUID uuid = UUID.fromString(String.valueOf(value));
-		return uuid.toString();
-	}
+        UUID uuid = UUID.fromString(String.valueOf(value));
+        return uuid.toString();
+    }
 }

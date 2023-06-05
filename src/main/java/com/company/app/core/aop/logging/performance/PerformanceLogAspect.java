@@ -50,69 +50,69 @@ import java.util.concurrent.TimeUnit;
 @ConditionalOnProperty(prefix = "performance.log.annotation", name = "enable", havingValue = "true")
 public class PerformanceLogAspect {
 
-	@Autowired
-	PerformanceLogGuidExtractor guidExtractor;
+    @Autowired
+    PerformanceLogGuidExtractor guidExtractor;
 
-	@PostConstruct
-	void init() {
-		log.debug("**********     создан [{}]     **********", this.getClass().getName());
-	}
+    @PostConstruct
+    void init() {
+        log.debug("**********     создан [{}]     **********", this.getClass().getName());
+    }
 
-	@Pointcut("@annotation(PerformanceLogAnnotation)")
-	public void ifPerformanceLogAnnotation() {
-	}
+    @Pointcut("@annotation(PerformanceLogAnnotation)")
+    public void ifPerformanceLogAnnotation() {
+    }
 
-	@SneakyThrows
-	@Around("ifPerformanceLogAnnotation()")
-	public Object ifPerformanceLogAnnotationAdvice(ProceedingJoinPoint proceedingJoinPoint) {
-		if (log.isDebugEnabled()) {
-			Stopwatch stopwatch = Stopwatch.createStarted();
-			Signature signature = proceedingJoinPoint.getSignature();
-			String guid = guidExtractor.extractGuid(proceedingJoinPoint);
-			doLogBefore(guid, signature);
+    @SneakyThrows
+    @Around("ifPerformanceLogAnnotation()")
+    public Object ifPerformanceLogAnnotationAdvice(ProceedingJoinPoint proceedingJoinPoint) {
+        if (log.isDebugEnabled()) {
+            Stopwatch stopwatch = Stopwatch.createStarted();
+            Signature signature = proceedingJoinPoint.getSignature();
+            String guid = guidExtractor.extractGuid(proceedingJoinPoint);
+            doLogBefore(guid, signature);
 
-			Object proceed = proceedingJoinPoint.proceed(proceedingJoinPoint.getArgs());
+            Object proceed = proceedingJoinPoint.proceed(proceedingJoinPoint.getArgs());
 
-			stopwatch.stop();
-			doLogAfter(stopwatch, guid, signature, proceed);
-			return proceed;
-		} else {
-			return proceedingJoinPoint.proceed(proceedingJoinPoint.getArgs());
-		}
-	}
+            stopwatch.stop();
+            doLogAfter(stopwatch, guid, signature, proceed);
+            return proceed;
+        } else {
+            return proceedingJoinPoint.proceed(proceedingJoinPoint.getArgs());
+        }
+    }
 
-	private void doLogAfter(Stopwatch stopwatch, String guid, Signature signature, Object proceed) {
-		if (proceed instanceof Collection) {
-			doCollectionPerformanceLog(stopwatch, guid, signature, (Collection<?>) proceed);
-		} else {
-			doDefaultPerformanceLog(stopwatch, guid, signature);
-		}
-	}
+    private void doLogAfter(Stopwatch stopwatch, String guid, Signature signature, Object proceed) {
+        if (proceed instanceof Collection) {
+            doCollectionPerformanceLog(stopwatch, guid, signature, (Collection<?>) proceed);
+        } else {
+            doDefaultPerformanceLog(stopwatch, guid, signature);
+        }
+    }
 
-	private void doLogBefore(String guid, Signature signature) {
-		log.debug("[{}]: запущен {}.{}",
-				guid,
-				signature.getDeclaringType().getName(),
-				signature.getName()
-		);
-	}
+    private void doLogBefore(String guid, Signature signature) {
+        log.debug("[{}]: запущен {}.{}",
+                guid,
+                signature.getDeclaringType().getName(),
+                signature.getName()
+        );
+    }
 
-	private void doCollectionPerformanceLog(Stopwatch stopwatch, String guid, Signature signature, Collection<?> proceed) {
-		log.debug("[{}]: за [{}] ms вернул [{}] шт. выполнен {}.{}",
-				guid,
-				stopwatch.elapsed(TimeUnit.MILLISECONDS),
-				proceed.size(),
-				signature.getDeclaringType().getName(),
-				signature.getName()
-		);
-	}
+    private void doCollectionPerformanceLog(Stopwatch stopwatch, String guid, Signature signature, Collection<?> proceed) {
+        log.debug("[{}]: за [{}] ms вернул [{}] шт. выполнен {}.{}",
+                guid,
+                stopwatch.elapsed(TimeUnit.MILLISECONDS),
+                proceed.size(),
+                signature.getDeclaringType().getName(),
+                signature.getName()
+        );
+    }
 
-	private void doDefaultPerformanceLog(Stopwatch stopwatch, String guid, Signature signature) {
-		log.debug("[{}]: за [{}] ms выполнен {}.{}",
-				guid,
-				stopwatch.elapsed(TimeUnit.MILLISECONDS),
-				signature.getDeclaringType().getName(),
-				signature.getName()
-		);
-	}
+    private void doDefaultPerformanceLog(Stopwatch stopwatch, String guid, Signature signature) {
+        log.debug("[{}]: за [{}] ms выполнен {}.{}",
+                guid,
+                stopwatch.elapsed(TimeUnit.MILLISECONDS),
+                signature.getDeclaringType().getName(),
+                signature.getName()
+        );
+    }
 }

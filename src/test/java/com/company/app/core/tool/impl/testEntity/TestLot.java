@@ -11,10 +11,10 @@ import java.util.List;
 @EqualsAndHashCode
 public class TestLot {
 
-	private Long id;
-	private String name;
-	private String price;
-	private String discount;
-	private ProductDescription productDescription;
-	private List<ProductProperty> productPropertiesList;
+    private Long id;
+    private String name;
+    private String price;
+    private String discount;
+    private ProductDescription productDescription;
+    private List<ProductProperty> productPropertiesList;
 }

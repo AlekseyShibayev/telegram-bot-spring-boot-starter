@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class ExperimentContext extends AbstractContext {
 
-	public UUID getGuidMethod() {
-		return guid;
-	}
+    public UUID getGuidMethod() {
+        return guid;
+    }
 }

@@ -6,6 +6,6 @@ import java.util.UUID;
 
 public abstract class AbstractContext implements Context {
 
-	@Setter
-	UUID guid;
+    @Setter
+    UUID guid;
 }

@@ -9,6 +9,6 @@ import lombok.*;
 @EqualsAndHashCode
 public class ProductDescription {
 
-	private String composition;
-	private String description;
+    private String composition;
+    private String description;
 }

@@ -9,17 +9,17 @@ import java.util.Map;
 
 public interface DataExtractorTool {
 
-	String getFileAsString(String fileName);
+    String getFileAsString(String fileName);
 
-	List<File> getFiles(String packageName);
+    List<File> getFiles(String packageName);
 
-	Map<String, String> getProperties(String fileName);
+    Map<String, String> getProperties(String fileName);
 
-	String getHtmlResponse(String urlName);
+    String getHtmlResponse(String urlName);
 
-	JSONObject getJsonObject(JSONObject jsonObject, String searchString);
+    JSONObject getJsonObject(JSONObject jsonObject, String searchString);
 
-	JSONArray getJsonArray(JSONObject jsonObject, String searchString);
+    JSONArray getJsonArray(JSONObject jsonObject, String searchString);
 
-	String getFirstString(JSONObject jsonObject, String searchString);
+    String getFirstString(JSONObject jsonObject, String searchString);
 }

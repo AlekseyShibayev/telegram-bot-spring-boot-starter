@@ -5,5 +5,5 @@ import com.company.app.core.aop.logging.performance.component.config.Performance
 
 public interface PerformanceLogActionRegistry {
 
-	PerformanceLogAction getAction(PerformanceLogActionType actionType);
+    PerformanceLogAction getAction(PerformanceLogActionType actionType);
 }

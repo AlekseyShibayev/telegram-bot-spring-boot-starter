@@ -16,40 +16,40 @@ import java.util.UUID;
  */
 class PerformanceLogAspectTest extends SpringBootTestApplicationContext {
 
-	@Autowired
-	PerformanceLogAspectExample example;
+    @Autowired
+    PerformanceLogAspectExample example;
 
-	private static final String GUID = "11111111-1111-1111-1111-111111111111";
+    private static final String GUID = "11111111-1111-1111-1111-111111111111";
 
-	@Test
-	void withEmptyAnnotationTest(CapturedOutput capture) {
-		ExperimentContextChild child = new ExperimentContextChild();
-		child.setGuid(UUID.fromString(GUID));
-		example.anyMethodNameWithEmptyAnnotation(child);
-		Assertions.assertNotNull(capture.getOut());
-	}
+    @Test
+    void withEmptyAnnotationTest(CapturedOutput capture) {
+        ExperimentContextChild child = new ExperimentContextChild();
+        child.setGuid(UUID.fromString(GUID));
+        example.anyMethodNameWithEmptyAnnotation(child);
+        Assertions.assertNotNull(capture.getOut());
+    }
 
-	@Test
-	void testWithGuidAsParameter(CapturedOutput capture) {
-		ExperimentContextChild child = new ExperimentContextChild();
-		child.setGuid(UUID.fromString(GUID));
-		example.anyMethodNameWithGuidAsParameter(child, GUID);
-		Assertions.assertTrue(capture.getOut().contains(GUID));
-	}
+    @Test
+    void testWithGuidAsParameter(CapturedOutput capture) {
+        ExperimentContextChild child = new ExperimentContextChild();
+        child.setGuid(UUID.fromString(GUID));
+        example.anyMethodNameWithGuidAsParameter(child, GUID);
+        Assertions.assertTrue(capture.getOut().contains(GUID));
+    }
 
-	@Test
-	void testWithNumberAndMethodName(CapturedOutput capture) {
-		ExperimentContextChild child = new ExperimentContextChild();
-		child.setGuid(UUID.fromString(GUID));
-		example.anyMethodNameWithNumberAndMethodName(child);
-		Assertions.assertTrue(capture.getOut().contains(GUID));
-	}
+    @Test
+    void testWithNumberAndMethodName(CapturedOutput capture) {
+        ExperimentContextChild child = new ExperimentContextChild();
+        child.setGuid(UUID.fromString(GUID));
+        example.anyMethodNameWithNumberAndMethodName(child);
+        Assertions.assertTrue(capture.getOut().contains(GUID));
+    }
 
-	@Test
-	void testWithNumberAndFieldName(CapturedOutput capture) {
-		ExperimentContextChild child = new ExperimentContextChild();
-		child.setGuid(UUID.fromString(GUID));
-		example.anyMethodNameWithNumberAndFieldName(child);
-		Assertions.assertTrue(capture.getOut().contains(GUID));
-	}
+    @Test
+    void testWithNumberAndFieldName(CapturedOutput capture) {
+        ExperimentContextChild child = new ExperimentContextChild();
+        child.setGuid(UUID.fromString(GUID));
+        example.anyMethodNameWithNumberAndFieldName(child);
+        Assertions.assertTrue(capture.getOut().contains(GUID));
+    }
 }

@@ -24,11 +24,11 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PerformanceLogAnnotation {
 
-	PerformanceLogActionType actionType() default PerformanceLogActionType.RANDOM;
+    PerformanceLogActionType actionType() default PerformanceLogActionType.RANDOM;
 
-	String number() default "";
+    String number() default "";
 
-	String methodName() default "";
+    String methodName() default "";
 
-	String fieldName() default "";
+    String fieldName() default "";
 }

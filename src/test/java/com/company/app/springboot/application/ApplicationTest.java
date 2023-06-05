@@ -7,11 +7,11 @@ import org.springframework.context.ApplicationContext;
 
 class ApplicationTest extends SpringBootTestApplicationContext {
 
-	@Autowired
-	private ApplicationContext applicationContext;
+    @Autowired
+    private ApplicationContext applicationContext;
 
-	@Test
-	void context_mustRise() {
-		Assertions.assertNotNull(applicationContext);
-	}
+    @Test
+    void context_mustRise() {
+        Assertions.assertNotNull(applicationContext);
+    }
 }

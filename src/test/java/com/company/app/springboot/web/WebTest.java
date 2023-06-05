@@ -7,6 +7,6 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest
 public class WebTest {
 
-	@Autowired
-	MockMvc mockMvc;
+    @Autowired
+    MockMvc mockMvc;
 }

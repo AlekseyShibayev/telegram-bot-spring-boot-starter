@@ -13,45 +13,45 @@ import java.util.List;
 @Setter
 public class JsonSearcher {
 
-	private JSONObject result;
-	private JSONArray resultArray;
-	private List<String> strings = new ArrayList<>();
-	private int counter;
+    private JSONObject result;
+    private JSONArray resultArray;
+    private List<String> strings = new ArrayList<>();
+    private int counter;
 
-	public void doRecursiveSearch(JSONObject jsonObject, String search) {
-		Iterator<String> keys = jsonObject.keys();
-		while (keys.hasNext()) {
-			String key = keys.next();
-			check(jsonObject, search, key);
-			execute(jsonObject.get(key), search);
-		}
-	}
+    public void doRecursiveSearch(JSONObject jsonObject, String search) {
+        Iterator<String> keys = jsonObject.keys();
+        while (keys.hasNext()) {
+            String key = keys.next();
+            check(jsonObject, search, key);
+            execute(jsonObject.get(key), search);
+        }
+    }
 
-	private void execute(Object jsonObject, String search) {
-		if (jsonObject instanceof JSONObject) {
-			doRecursiveSearch((JSONObject) jsonObject, search);
-		} else if (jsonObject instanceof JSONArray) {
-			JSONArray jsonArray = (JSONArray) jsonObject;
-			for (Object object : jsonArray) {
-				if (object instanceof JSONObject) {
-					doRecursiveSearch((JSONObject) object, search);
-				}
-			}
-		}
-	}
+    private void execute(Object jsonObject, String search) {
+        if (jsonObject instanceof JSONObject) {
+            doRecursiveSearch((JSONObject) jsonObject, search);
+        } else if (jsonObject instanceof JSONArray) {
+            JSONArray jsonArray = (JSONArray) jsonObject;
+            for (Object object : jsonArray) {
+                if (object instanceof JSONObject) {
+                    doRecursiveSearch((JSONObject) object, search);
+                }
+            }
+        }
+    }
 
-	private void check(JSONObject jsonObject, String search, String key) {
-		if (key.equals(search)) {
-			Object object = jsonObject.get(key);
-			if (object instanceof JSONObject) {
-				this.setResult((JSONObject) jsonObject.get(key));
-			} else if (object instanceof JSONArray) {
-				this.setResultArray((JSONArray) jsonObject.get(key));
-			} else if (object instanceof String) {
-				this.strings.add(String.valueOf(object));
-				return;
-			}
-			this.setCounter(counter++);
-		}
-	}
+    private void check(JSONObject jsonObject, String search, String key) {
+        if (key.equals(search)) {
+            Object object = jsonObject.get(key);
+            if (object instanceof JSONObject) {
+                this.setResult((JSONObject) jsonObject.get(key));
+            } else if (object instanceof JSONArray) {
+                this.setResultArray((JSONArray) jsonObject.get(key));
+            } else if (object instanceof String) {
+                this.strings.add(String.valueOf(object));
+                return;
+            }
+            this.setCounter(counter++);
+        }
+    }
 }

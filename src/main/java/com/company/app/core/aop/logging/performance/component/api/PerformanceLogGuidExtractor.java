@@ -4,5 +4,5 @@ import org.aspectj.lang.ProceedingJoinPoint;
 
 public interface PerformanceLogGuidExtractor {
 
-	String extractGuid(ProceedingJoinPoint proceedingJoinPoint);
+    String extractGuid(ProceedingJoinPoint proceedingJoinPoint);
 }
