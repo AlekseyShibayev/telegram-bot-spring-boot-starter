@@ -95,7 +95,7 @@ public class JsonToolImpl<T> implements JsonTool<T> {
     }
     private ObjectMapper copyAndConfigure(MapperSettings settings) {
         ObjectMapper copy = mapper.copy();
-        copy.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, settings.failOnUnknownProperties);
+        copy.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, settings.isFailOnUnknownProperties());
         return copy;
     }
 
