@@ -1,17 +1,17 @@
-package com.company.app.core.tool.impl.wbresponse.data;
+package com.company.app.core.tool.json.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ResponseData {
+public class ResponseProducts {
 
-    List<ResponseProducts> products;
+    Integer id;
+    String name;
+    Integer salePriceU;
 }

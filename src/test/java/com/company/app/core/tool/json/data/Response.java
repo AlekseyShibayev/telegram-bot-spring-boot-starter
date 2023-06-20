@@ -1,4 +1,4 @@
-package com.company.app.core.tool.impl.wbresponse.data;
+package com.company.app.core.tool.json.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

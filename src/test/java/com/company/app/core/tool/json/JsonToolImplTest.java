@@ -1,10 +1,10 @@
-package com.company.app.core.tool.impl;
+package com.company.app.core.tool.json;
 
-import com.company.app.core.tool.api.JsonSerializationTool;
-import com.company.app.core.tool.impl.testEntity.ProductDescription;
-import com.company.app.core.tool.impl.testEntity.ProductProperty;
-import com.company.app.core.tool.impl.testEntity.TestLot;
-import com.company.app.core.tool.impl.wbresponse.data.Response;
+import com.company.app.core.tool.impl.DataExtractorToolImpl;
+import com.company.app.core.tool.json.testEntity.ProductDescription;
+import com.company.app.core.tool.json.testEntity.ProductProperty;
+import com.company.app.core.tool.json.testEntity.TestLot;
+import com.company.app.core.tool.json.data.Response;
 import com.google.common.collect.ImmutableList;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
@@ -19,15 +19,15 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
 
-class JsonSerializationToolImplTest {
+class JsonToolImplTest {
 
     private static final String FILE_NAME = "src/test/resources/core/lot_test.json";
 
-    private JsonSerializationTool<TestLot> jsonSerializationTool;
+    private JsonTool<TestLot> jsonTool;
 
     @BeforeEach
     public void init() {
-        jsonSerializationTool = new JsonSerializationToolImpl<>();
+        jsonTool = new JsonToolImpl<>();
     }
 
     private void cleanFile() throws IOException {
@@ -40,8 +40,8 @@ class JsonSerializationToolImplTest {
         cleanFile();
         List<TestLot> before = createLots();
 
-        jsonSerializationTool.save(before, new File(FILE_NAME));
-        List<TestLot> after = jsonSerializationTool.load(new File(FILE_NAME), TestLot.class);
+        jsonTool.toFileAsJson(before, new File(FILE_NAME));
+        List<TestLot> after = jsonTool.toJavaAsList(new File(FILE_NAME), TestLot.class);
 
         Assertions.assertEquals(2, after.size());
         Assertions.assertEquals(before.get(0).getPrice(), after.get(0).getPrice());
@@ -61,8 +61,8 @@ class JsonSerializationToolImplTest {
         cleanFile();
         List<TestLot> before = createLotsWithNestedFields();
 
-        jsonSerializationTool.save(before, new File(FILE_NAME));
-        List<TestLot> after = jsonSerializationTool.load(new File(FILE_NAME), TestLot.class);
+        jsonTool.toFileAsJson(before, new File(FILE_NAME));
+        List<TestLot> after = jsonTool.toJavaAsList(new File(FILE_NAME), TestLot.class);
 
         MatcherAssert.assertThat(before.size(), IsEqual.equalTo(after.size()));
         Assertions.assertEquals(before.size(), after.size());
@@ -103,13 +103,16 @@ class JsonSerializationToolImplTest {
     @Test
     void temp_name_test() {
         DataExtractorToolImpl dataExtractorTool = new DataExtractorToolImpl();
-        JsonSerializationToolImpl<Response> tool = new JsonSerializationToolImpl<>();
+        JsonToolImpl<Response> tool = new JsonToolImpl<>();
         String fileAsString = dataExtractorTool.getFileAsString("core/tool/wb_response_example.json");
 
-        Response response = tool.loadOne(fileAsString, Response.class);
+        Response response = tool.toJavaAsObject(fileAsString, Response.class, MapperSettings.builder()
+                .failOnUnknownProperties(false)
+                .build());
 
         Assertions.assertNotNull(response);
         Assertions.assertNotNull(response.getData().getProducts());
         Assertions.assertEquals(2, response.getData().getProducts().size());
     }
+
 }

@@ -1,4 +1,4 @@
-package com.company.app.core.tool.impl.testEntity;
+package com.company.app.core.tool.json.testEntity;
 
 import lombok.*;
 
