@@ -18,8 +18,8 @@ public class JsonToolImpl<T> implements JsonTool<T> {
 
     @SneakyThrows
     @Override
-    public void toFileAsJson(List<T> source, File file) {
-        mapper.writeValue(file, source.toArray());
+    public void toJson(List<T> source, File target) {
+        mapper.writeValue(target, source.toArray());
     }
 
     @SneakyThrows

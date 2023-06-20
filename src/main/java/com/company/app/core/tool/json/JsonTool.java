@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface JsonTool<T> {
 
-    void toFileAsJson(List<T> source, File file);
+    void toJson(List<T> source, File target);
 
     String toJson(List<T> source);
 

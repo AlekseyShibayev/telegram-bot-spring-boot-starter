@@ -40,7 +40,7 @@ class JsonToolImplTest {
         cleanFile();
         List<TestLot> before = createLots();
 
-        jsonTool.toFileAsJson(before, new File(FILE_NAME));
+        jsonTool.toJson(before, new File(FILE_NAME));
         List<TestLot> after = jsonTool.toJavaAsList(new File(FILE_NAME), TestLot.class);
 
         Assertions.assertEquals(2, after.size());
@@ -61,7 +61,7 @@ class JsonToolImplTest {
         cleanFile();
         List<TestLot> before = createLotsWithNestedFields();
 
-        jsonTool.toFileAsJson(before, new File(FILE_NAME));
+        jsonTool.toJson(before, new File(FILE_NAME));
         List<TestLot> after = jsonTool.toJavaAsList(new File(FILE_NAME), TestLot.class);
 
         MatcherAssert.assertThat(before.size(), IsEqual.equalTo(after.size()));
