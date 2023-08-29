@@ -17,6 +17,10 @@ public final class Logs {
         log.error(message, e.getMessage(), e);
     }
 
+    public static void doExceptionLog(Logger log, Exception e) {
+        log.error(e.getMessage(), e);
+    }
+
     public static void doExceptionLog(Throwable e, String message) {
         log.error(message, e.getMessage(), e);
     }
