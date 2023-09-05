@@ -1,7 +1,8 @@
-package com.company.app.core.aop.logging.performance.component.action;
+package com.company.app.core.aop.logging.performance.component.action.impl;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
-import com.company.app.core.aop.logging.performance.component.config.PerformanceLogActionType;
+import com.company.app.core.aop.logging.performance.component.action.PerformanceLogAbstractAction;
+import com.company.app.core.aop.logging.performance.component.PerformanceLogActionType;
 import lombok.SneakyThrows;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.stereotype.Component;
@@ -30,4 +31,5 @@ public class PerformanceLogNumberAndFieldAction extends PerformanceLogAbstractAc
         UUID uuid = UUID.fromString(String.valueOf(value));
         return uuid.toString();
     }
+
 }

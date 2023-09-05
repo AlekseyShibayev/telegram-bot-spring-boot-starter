@@ -1,30 +1,23 @@
-package com.company.app.core.aop.logging.performance.component.impl;
+package com.company.app.core.aop.logging.performance.component;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.core.aop.logging.performance.component.action.PerformanceLogAction;
-import com.company.app.core.aop.logging.performance.component.api.PerformanceLogActionRegistry;
-import com.company.app.core.aop.logging.performance.component.api.PerformanceLogGuidExtractor;
-import com.company.app.core.aop.logging.performance.component.api.PerformanceLogReflector;
 import com.google.common.base.Stopwatch;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author shibaev.aleksey 04.04.2023
- */
 @Slf4j
 @Component
-public class PerformanceLogGuidExtractorImpl implements PerformanceLogGuidExtractor {
+@RequiredArgsConstructor
+public class PerformanceLogGuidExtractor {
 
-    @Autowired
-    PerformanceLogReflector reflector;
-    @Autowired
-    PerformanceLogActionRegistry actionRegistry;
+    private final PerformanceLogReflector reflector;
+    private final PerformanceLogActionRegistry actionRegistry;
 
     public String extractGuid(ProceedingJoinPoint proceedingJoinPoint) {
         String result = "";
@@ -43,4 +36,5 @@ public class PerformanceLogGuidExtractorImpl implements PerformanceLogGuidExtrac
         }
         return result;
     }
+
 }

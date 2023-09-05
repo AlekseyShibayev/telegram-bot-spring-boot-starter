@@ -1,8 +1,9 @@
 package com.company.app.core.aop.logging.performance;
 
-import com.company.app.core.aop.logging.performance.component.api.PerformanceLogGuidExtractor;
-import com.company.app.core.aop.logging.performance.component.config.PerformanceLogActionType;
+import com.company.app.core.aop.logging.performance.component.PerformanceLogGuidExtractor;
+import com.company.app.core.aop.logging.performance.component.PerformanceLogActionType;
 import com.google.common.base.Stopwatch;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -10,7 +11,6 @@ import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
@@ -47,15 +47,15 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Aspect
 @Component
+@RequiredArgsConstructor
 @ConditionalOnProperty(prefix = "performance.log.annotation", name = "enable", havingValue = "true")
 public class PerformanceLogAspect {
 
-    @Autowired
-    PerformanceLogGuidExtractor guidExtractor;
+    private final PerformanceLogGuidExtractor guidExtractor;
 
     @PostConstruct
     void init() {
-        log.debug("**********     создан [{}]     **********", this.getClass().getName());
+        log.debug("**********     created [{}]     **********", this.getClass().getName());
     }
 
     @Pointcut("@annotation(PerformanceLogAnnotation)")

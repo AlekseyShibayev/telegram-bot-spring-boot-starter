@@ -1,6 +1,5 @@
-package com.company.app.core.aop.logging.performance.component.impl;
+package com.company.app.core.aop.logging.performance.component;
 
-import com.company.app.core.aop.logging.performance.component.api.PerformanceLogReflector;
 import lombok.SneakyThrows;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -14,12 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author shibaev.aleksey 04.04.2023
- */
 @Component
-public class PerformanceLogReflectorImpl implements PerformanceLogReflector {
-
+public class PerformanceLogReflector {
     /**
      * Случаи с перегрузками методов рассматривать не будем.
      * Ошибки тут не будет, как минимум 1 метод нас дёрнул по аннотации.

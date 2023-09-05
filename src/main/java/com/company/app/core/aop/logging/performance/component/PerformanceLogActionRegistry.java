@@ -1,9 +1,7 @@
-package com.company.app.core.aop.logging.performance.component.impl;
+package com.company.app.core.aop.logging.performance.component;
 
 import com.company.app.core.aop.logging.performance.component.action.PerformanceLogAction;
-import com.company.app.core.aop.logging.performance.component.api.PerformanceLogActionRegistry;
-import com.company.app.core.aop.logging.performance.component.config.PerformanceLogActionType;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
 
@@ -13,19 +11,14 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class PerformanceLogActionRegistryImpl implements PerformanceLogActionRegistry {
+@RequiredArgsConstructor
+public class PerformanceLogActionRegistry {
 
-    @Autowired
-    List<PerformanceLogAction> actionList;
-    private Map<PerformanceLogActionType, PerformanceLogAction> actions;
+    private final List<PerformanceLogAction> actionList;
+    private final Map<PerformanceLogActionType, PerformanceLogAction> actions = new EnumMap<>(PerformanceLogActionType.class);
 
     @PostConstruct
     public void init() {
-        registerActions();
-    }
-
-    private void registerActions() {
-        actions = new EnumMap<>(PerformanceLogActionType.class);
         for (PerformanceLogAction action : actionList) {
             if (actions.containsKey(action.getType())) {
                 throw new DuplicateKeyException(action.getType().toString());
@@ -35,7 +28,6 @@ public class PerformanceLogActionRegistryImpl implements PerformanceLogActionReg
         }
     }
 
-    @Override
     public PerformanceLogAction getAction(PerformanceLogActionType actionType) {
         PerformanceLogAction action = actions.get(actionType);
         if (action == null) {
@@ -44,4 +36,5 @@ public class PerformanceLogActionRegistryImpl implements PerformanceLogActionReg
             return action;
         }
     }
+
 }

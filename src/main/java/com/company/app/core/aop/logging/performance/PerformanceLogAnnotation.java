@@ -1,6 +1,6 @@
 package com.company.app.core.aop.logging.performance;
 
-import com.company.app.core.aop.logging.performance.component.config.PerformanceLogActionType;
+import com.company.app.core.aop.logging.performance.component.PerformanceLogActionType;
 
 import java.lang.annotation.*;
 

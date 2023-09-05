@@ -14,4 +14,5 @@ public class Strings {
             throw new IllegalArgumentException(exception);
         }
     }
+
 }
