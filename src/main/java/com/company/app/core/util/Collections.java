@@ -1,19 +1,22 @@
 package com.company.app.core.util;
 
-import lombok.experimental.UtilityClass;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collection;
 
-@UtilityClass
-public class Collections {
+public interface Collections {
 
     /**
      * null       -> true
      * size == 0  -> true
      * size > 0   -> false
      */
-    public static boolean isEmpty(Collection<?> collection) {
+    static boolean isEmpty(Collection<?> collection) {
         return CollectionUtils.isEmpty(collection);
     }
 
@@ -22,8 +25,13 @@ public class Collections {
      * size == 0  -> false
      * size > 0   -> true
      */
-    public static boolean isNotEmpty(Collection<?> collection) {
+    static boolean isNotEmpty(Collection<?> collection) {
         return !CollectionUtils.isEmpty(collection);
+    }
+
+    @SafeVarargs
+    static <T> List<T> list(T... t) {
+        return Arrays.stream(t).collect(Collectors.toCollection(ArrayList::new));
     }
 
 }
